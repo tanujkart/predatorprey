@@ -1,0 +1,557 @@
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[         0,          0]
+NotebookDataLength[     24237,        556]
+NotebookOptionsPosition[     22808,        517]
+NotebookOutlinePosition[     23201,        533]
+CellTagsIndexPosition[     23158,        530]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Simulating Predator-Prey Dynamics with Visualization", "Title",
+ CellChangeTimes->{{3.946045348092956*^9, 
+  3.946045377237111*^9}},ExpressionUUID->"7119caf0-49a6-4e6f-b3cd-\
+dc3abd203610"],
+
+Cell["\<\
+Tanuj Karthikeyan
+January 16th 2025
+This Mathematica script is meant to simulate predator prey relationships and \
+population amounts with adjustable sliders for the different variables of the \
+Lotka-Volterra equations and evaluating it over time.\
+\>", "Text",
+ CellChangeTimes->{{3.946045348092956*^9, 3.94604535983922*^9}, {
+  3.946045392988311*^9, 3.946045424250267*^9}, {3.946045533619492*^9, 
+  3.9460455472909193`*^9}, {3.9460457312316313`*^9, 3.946045740415715*^9}, {
+  3.946045974992888*^9, 3.946046019916192*^9}, {3.9460460598166447`*^9, 
+  3.94604606842052*^9}, {3.946046137867668*^9, 3.94604614146559*^9}, {
+  3.94604669038623*^9, 3.946046709653529*^9}, {3.946047513072709*^9, 
+  3.946047513648794*^9}, {3.946079506693434*^9, 
+  3.94607950881599*^9}},ExpressionUUID->"c9f7c07f-b15f-4008-aadb-\
+c13b32dab481"],
+
+Cell[CellGroupData[{
+
+Cell["2D Overlapping Graph", "Section",
+ CellChangeTimes->{{3.94604671898435*^9, 3.946046724283152*^9}, {
+  3.9460467586265583`*^9, 3.946046796390748*^9}, {3.946047787321801*^9, 
+  3.9460477888674803`*^9}},ExpressionUUID->"602e9aa4-f191-4c87-b6cc-\
+2fbb9fbf0855"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"solution", ",", "preyPopulation", ",", "predatorPopulation"}],
+        "}"}], ",", 
+      RowBox[{
+       RowBox[{"solution", "=", 
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"x", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"\[Alpha]", " ", 
+               RowBox[{"x", "[", "t", "]"}]}], "-", 
+              RowBox[{"\[Beta]", " ", 
+               RowBox[{"x", "[", "t", "]"}], " ", 
+               RowBox[{"y", "[", "t", "]"}]}]}]}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"\[Delta]", " ", 
+               RowBox[{"x", "[", "t", "]"}], " ", 
+               RowBox[{"y", "[", "t", "]"}]}], "-", 
+              RowBox[{"\[Gamma]", " ", 
+               RowBox[{"y", "[", "t", "]"}]}]}]}], ",", 
+            RowBox[{
+             RowBox[{"x", "[", "0", "]"}], "==", "x0"}], ",", 
+            RowBox[{
+             RowBox[{"y", "[", "0", "]"}], "==", "y0"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "tmax"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"preyPopulation", "=", 
+        RowBox[{
+         RowBox[{"x", "[", "t", "]"}], "/.", " ", 
+         RowBox[{"solution", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"predatorPopulation", "=", 
+        RowBox[{
+         RowBox[{"y", "[", "t", "]"}], "/.", " ", 
+         RowBox[{"solution", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Show", "[", 
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"preyPopulation", ",", "predatorPopulation"}], "}"}], ",", 
+          
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "tmax"}], "}"}], ",", 
+          RowBox[{"PlotLegends", "->", 
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<Prey Population Size\>\"", ",", 
+             "\"\<Predator Population Size\>\""}], "}"}]}], ",", 
+          RowBox[{"PlotStyle", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Blue", ",", "Thick"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"Red", ",", "Thick"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"AxesLabel", "->", 
+           RowBox[{"{", 
+            RowBox[{"\"\<Time\>\"", ",", "\"\<Population\>\""}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "->", "All"}], ",", 
+          RowBox[{"PlotLabel", "->", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<2D Predator-Prey Dynamics\>\"", ",", "Bold", ",", "14"}], 
+            "]"}]}]}], "]"}], "]"}]}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Alpha]", ",", "0.5", ",", "\"\<Prey Growth Rate\>\""}], 
+       "}"}], ",", "0.1", ",", "1", ",", "0.01"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Beta]", ",", "0.02", ",", "\"\<Predation Rate\>\""}], "}"}],
+       ",", "0.01", ",", "0.1", ",", "0.001"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Gamma]", ",", "0.5", ",", "\"\<Predator Death Rate\>\""}], 
+       "}"}], ",", "0.1", ",", "1", ",", "0.01"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "\[Delta]", ",", "0.02", ",", "\"\<Predator Reproduction Rate\>\""}], 
+       "}"}], ",", "0.01", ",", "0.1", ",", "0.001"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x0", ",", "40", ",", "\"\<Initial Prey Population\>\""}], 
+       "}"}], ",", "10", ",", "100", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"y0", ",", "9", ",", "\"\<Initial Predator Population\>\""}], 
+       "}"}], ",", "1", ",", "50", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"tmax", ",", "50", ",", "\"\<Simulation Time\>\""}], "}"}], 
+      ",", "10", ",", "100", ",", "1"}], "}"}]}], "]"}], "\n"}]], "Input",
+ CellChangeTimes->{{3.9460469307876368`*^9, 3.9460469700619164`*^9}, {
+   3.946047005467701*^9, 3.94604703538365*^9}, {3.946047147154748*^9, 
+   3.9460471994989367`*^9}, {3.946047258981336*^9, 3.946047260622558*^9}, {
+   3.946047776749172*^9, 3.946047776907508*^9}, 3.9460482825344553`*^9, {
+   3.9460789352971363`*^9, 3.946078972707025*^9}},
+ CellLabel->"In[75]:=",ExpressionUUID->"58d1764e-6306-4cb7-934f-e9e272252988"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`tmax$$ = 45, $CellContext`x0$$ = 
+    48, $CellContext`y0$$ = 21, $CellContext`\[Alpha]$$ = 
+    0.49, $CellContext`\[Beta]$$ = 0.048, $CellContext`\[Gamma]$$ = 
+    0.49, $CellContext`\[Delta]$$ = 0.048, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`\[Alpha]$$], 0.5, "Prey Growth Rate"}, 0.1, 1, 0.01, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`\[Beta]$$], 0.02, "Predation Rate"}, 0.01, 0.1, 
+      0.001, ControlType -> Manipulator}, {{
+       Hold[$CellContext`\[Gamma]$$], 0.5, "Predator Death Rate"}, 0.1, 1, 
+      0.01, ControlType -> Manipulator}, {{
+       Hold[$CellContext`\[Delta]$$], 0.02, "Predator Reproduction Rate"}, 
+      0.01, 0.1, 0.001, ControlType -> Manipulator}, {{
+       Hold[$CellContext`x0$$], 40, "Initial Prey Population"}, 10, 100, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`y0$$], 9, "Initial Predator Population"}, 1, 50, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`tmax$$], 50, "Simulation Time"}, 10, 100, 1, 
+      ControlType -> Manipulator}}, Typeset`size$$ = {
+    545.6902343749999, {112.53551356220088`, 118.26744715595085`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`tmax$$ = 50, $CellContext`x0$$ = 
+        40, $CellContext`y0$$ = 9, $CellContext`\[Alpha]$$ = 
+        0.5, $CellContext`\[Beta]$$ = 0.02, $CellContext`\[Gamma]$$ = 
+        0.5, $CellContext`\[Delta]$$ = 0.02}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`solution$, $CellContext`preyPopulation$, \
+$CellContext`predatorPopulation$}, $CellContext`solution$ = 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+$CellContext`x[$CellContext`t] - $CellContext`\[Beta]$$ \
+$CellContext`x[$CellContext`t] $CellContext`y[$CellContext`t], 
+            Derivative[
+             1][$CellContext`y][$CellContext`t] == $CellContext`\[Delta]$$ \
+$CellContext`x[$CellContext`t] $CellContext`y[$CellContext`t] - $CellContext`\
+\[Gamma]$$ $CellContext`y[$CellContext`t], $CellContext`x[
+             0] == $CellContext`x0$$, $CellContext`y[
+             0] == $CellContext`y0$$}, {$CellContext`x, $CellContext`y}, \
+{$CellContext`t, 0, $CellContext`tmax$$}]; $CellContext`preyPopulation$ = 
+         ReplaceAll[
+           $CellContext`x[$CellContext`t], 
+           Part[$CellContext`solution$, 1]]; $CellContext`predatorPopulation$ = 
+         ReplaceAll[
+           $CellContext`y[$CellContext`t], 
+           Part[$CellContext`solution$, 1]]; Show[
+          
+          Plot[{$CellContext`preyPopulation$, \
+$CellContext`predatorPopulation$}, {$CellContext`t, 0, $CellContext`tmax$$}, 
+           PlotLegends -> {
+            "Prey Population Size", "Predator Population Size"}, 
+           PlotStyle -> {{Blue, Thick}, {Red, Thick}}, 
+           AxesLabel -> {"Time", "Population"}, PlotRange -> All, PlotLabel -> 
+           Style["2D Predator-Prey Dynamics", Bold, 14]]]], 
+      "Specifications" :> {{{$CellContext`\[Alpha]$$, 0.5, 
+          "Prey Growth Rate"}, 0.1, 1, 
+         0.01}, {{$CellContext`\[Beta]$$, 0.02, "Predation Rate"}, 0.01, 0.1, 
+         0.001}, {{$CellContext`\[Gamma]$$, 0.5, "Predator Death Rate"}, 0.1, 
+         1, 0.01}, {{$CellContext`\[Delta]$$, 0.02, 
+          "Predator Reproduction Rate"}, 0.01, 0.1, 
+         0.001}, {{$CellContext`x0$$, 40, "Initial Prey Population"}, 10, 100,
+          1}, {{$CellContext`y0$$, 9, "Initial Predator Population"}, 1, 50, 
+         1}, {{$CellContext`tmax$$, 50, "Simulation Time"}, 10, 100, 1}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      588.7902343749998, {235.5059389772399, 241.2378725709899}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.946047274672682*^9, 3.9460477796746597`*^9, 3.946048116540464*^9, 
+   3.946048350587612*^9, {3.9460789553818502`*^9, 3.9460789821079397`*^9}},
+ CellLabel->"Out[75]=",ExpressionUUID->"f3dc227b-45f2-4aa2-a023-672135bcf9b1"]
+}, Open  ]],
+
+Cell["\<\
+This graph is fully customizable as the user is able to adjust the slider to \
+determine the variables in the Lotka-Volterra equations resulting in \
+completely different graphs. \
+\>", "Text",
+ CellChangeTimes->{{3.9460473211995287`*^9, 3.9460473295988493`*^9}, {
+  3.9460474861281652`*^9, 3.9460475104880533`*^9}, {3.9460478426408043`*^9, 
+  3.946047854579718*^9}, {3.946047952813822*^9, 
+  3.946047960061833*^9}},ExpressionUUID->"30a8b1b8-2281-4dd5-b059-\
+42d356488ca4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3D Graph", "Section",
+ CellChangeTimes->{{3.9460478033555927`*^9, 3.946047805715934*^9}, {
+  3.946048056526366*^9, 
+  3.946048058817761*^9}},ExpressionUUID->"aee156db-ab4c-47be-8f04-\
+fe1a339f91b1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"solution", ",", "preyPop", ",", "predatorPop"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"solution", "=", 
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"x", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"\[Alpha]", " ", 
+               RowBox[{"x", "[", "t", "]"}]}], "-", 
+              RowBox[{"\[Beta]", " ", 
+               RowBox[{"x", "[", "t", "]"}], " ", 
+               RowBox[{"y", "[", "t", "]"}]}]}]}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"\[Delta]", " ", 
+               RowBox[{"x", "[", "t", "]"}], " ", 
+               RowBox[{"y", "[", "t", "]"}]}], "-", 
+              RowBox[{"\[Gamma]", " ", 
+               RowBox[{"y", "[", "t", "]"}]}]}]}], ",", 
+            RowBox[{
+             RowBox[{"x", "[", "0", "]"}], "==", "x0"}], ",", 
+            RowBox[{
+             RowBox[{"y", "[", "0", "]"}], "==", "y0"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "tmax"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"preyPop", "=", 
+        RowBox[{
+         RowBox[{"x", "[", "t", "]"}], "/.", " ", 
+         RowBox[{"solution", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"predatorPop", "=", 
+        RowBox[{
+         RowBox[{"y", "[", "t", "]"}], "/.", " ", 
+         RowBox[{"solution", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"Generate", " ", "3", "D", " ", "Parametric", " ", "Plot"}], 
+        "*)"}], 
+       RowBox[{"ParametricPlot3D", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"preyPop", ",", "predatorPop", ",", "t"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "tmax"}], "}"}], ",", 
+         RowBox[{"PlotStyle", "->", "Thick"}], ",", 
+         RowBox[{"AxesLabel", "->", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<Prey Population\>\"", ",", "\"\<Predator Population\>\"", 
+            ",", "\"\<Time\>\""}], "}"}]}], ",", 
+         RowBox[{"PlotRange", "->", "All"}], ",", 
+         RowBox[{"Boxed", "->", "True"}], ",", 
+         RowBox[{"TicksStyle", "->", 
+          RowBox[{"Directive", "[", 
+           RowBox[{"Black", ",", "Bold"}], "]"}]}], ",", 
+         RowBox[{"ViewPoint", "->", 
+          RowBox[{"{", 
+           RowBox[{"1.3", ",", 
+            RowBox[{"-", "2.4"}], ",", "1.8"}], "}"}]}], ",", 
+         RowBox[{"PlotLabel", "->", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+           "\"\<3D Predator-Prey Dynamics\>\"", ",", "Bold", ",", "14"}], 
+           "]"}]}], ",", 
+         RowBox[{"MeshFunctions", "->", 
+          RowBox[{"{", 
+           RowBox[{"#3", "&"}], "}"}]}], ",", 
+         RowBox[{"Mesh", "->", "10"}], ",", 
+         RowBox[{"MeshStyle", "->", 
+          RowBox[{"Directive", "[", 
+           RowBox[{"Gray", ",", "Dashed"}], "]"}]}]}], "]"}]}]}], "]"}], ",", 
+    
+    RowBox[{"(*", 
+     RowBox[{"Sliders", " ", "for", " ", "Parameters"}], "*)"}], 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Alpha]", ",", "0.5", ",", "\"\<Prey Growth Rate\>\""}], 
+       "}"}], ",", "0.1", ",", "1", ",", "0.01"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Beta]", ",", "0.02", ",", "\"\<Predation Rate\>\""}], "}"}],
+       ",", "0.005", ",", "0.05", ",", "0.001"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Gamma]", ",", "0.5", ",", "\"\<Predator Death Rate\>\""}], 
+       "}"}], ",", "0.1", ",", "1", ",", "0.01"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "\[Delta]", ",", "0.02", ",", "\"\<Predator Reproduction Rate\>\""}], 
+       "}"}], ",", "0.005", ",", "0.05", ",", "0.001"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x0", ",", "40", ",", "\"\<Initial Prey Population\>\""}], 
+       "}"}], ",", "10", ",", "100", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"y0", ",", "9", ",", "\"\<Initial Predator Population\>\""}], 
+       "}"}], ",", "1", ",", "50", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"tmax", ",", "50", ",", "\"\<Time Duration\>\""}], "}"}], ",", 
+      "10", ",", "100", ",", "5"}], "}"}]}], "]"}], "\n"}]], "Input",
+ CellChangeTimes->{{3.946047795297024*^9, 3.946047796960532*^9}, 
+   3.946048074504056*^9, 3.946048110585911*^9, {3.9460481811185093`*^9, 
+   3.946048191010127*^9}, {3.946048300238679*^9, 3.946048310859118*^9}},
+ CellLabel->"In[76]:=",ExpressionUUID->"28b3998f-791d-4585-b9c4-cf3e8dfc6456"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`tmax$$ = 50, $CellContext`x0$$ = 
+    50, $CellContext`y0$$ = 23, $CellContext`\[Alpha]$$ = 
+    0.5, $CellContext`\[Beta]$$ = 0.025, $CellContext`\[Gamma]$$ = 
+    0.5, $CellContext`\[Delta]$$ = 0.024, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`\[Alpha]$$], 0.5, "Prey Growth Rate"}, 0.1, 1, 0.01, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`\[Beta]$$], 0.02, "Predation Rate"}, 0.005, 0.05, 
+      0.001, ControlType -> Manipulator}, {{
+       Hold[$CellContext`\[Gamma]$$], 0.5, "Predator Death Rate"}, 0.1, 1, 
+      0.01, ControlType -> Manipulator}, {{
+       Hold[$CellContext`\[Delta]$$], 0.02, "Predator Reproduction Rate"}, 
+      0.005, 0.05, 0.001, ControlType -> Manipulator}, {{
+       Hold[$CellContext`x0$$], 40, "Initial Prey Population"}, 10, 100, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`y0$$], 9, "Initial Predator Population"}, 1, 50, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`tmax$$], 50, "Time Duration"}, 10, 100, 5, 
+      ControlType -> Manipulator}}, Typeset`size$$ = {
+    360., {187.24685681420956`, 192.97879040795956`}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`tmax$$ = 50, $CellContext`x0$$ = 
+        40, $CellContext`y0$$ = 9, $CellContext`\[Alpha]$$ = 
+        0.5, $CellContext`\[Beta]$$ = 0.02, $CellContext`\[Gamma]$$ = 
+        0.5, $CellContext`\[Delta]$$ = 0.02}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`solution$, $CellContext`preyPop$, \
+$CellContext`predatorPop$}, $CellContext`solution$ = 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+$CellContext`x[$CellContext`t] - $CellContext`\[Beta]$$ \
+$CellContext`x[$CellContext`t] $CellContext`y[$CellContext`t], 
+            Derivative[
+             1][$CellContext`y][$CellContext`t] == $CellContext`\[Delta]$$ \
+$CellContext`x[$CellContext`t] $CellContext`y[$CellContext`t] - $CellContext`\
+\[Gamma]$$ $CellContext`y[$CellContext`t], $CellContext`x[
+             0] == $CellContext`x0$$, $CellContext`y[
+             0] == $CellContext`y0$$}, {$CellContext`x, $CellContext`y}, \
+{$CellContext`t, 0, $CellContext`tmax$$}]; $CellContext`preyPop$ = 
+         ReplaceAll[
+           $CellContext`x[$CellContext`t], 
+           Part[$CellContext`solution$, 1]]; $CellContext`predatorPop$ = 
+         ReplaceAll[
+           $CellContext`y[$CellContext`t], 
+           Part[$CellContext`solution$, 1]]; 
+        ParametricPlot3D[{$CellContext`preyPop$, $CellContext`predatorPop$, \
+$CellContext`t}, {$CellContext`t, 0, $CellContext`tmax$$}, PlotStyle -> Thick,
+           AxesLabel -> {"Prey Population", "Predator Population", "Time"}, 
+          PlotRange -> All, Boxed -> True, TicksStyle -> 
+          Directive[Black, Bold], ViewPoint -> {1.3, -2.4, 1.8}, PlotLabel -> 
+          Style["3D Predator-Prey Dynamics", Bold, 14], 
+          MeshFunctions -> {#3& }, Mesh -> 10, MeshStyle -> 
+          Directive[Gray, Dashed]]], 
+      "Specifications" :> {{{$CellContext`\[Alpha]$$, 0.5, 
+          "Prey Growth Rate"}, 0.1, 1, 
+         0.01}, {{$CellContext`\[Beta]$$, 0.02, "Predation Rate"}, 0.005, 
+         0.05, 0.001}, {{$CellContext`\[Gamma]$$, 0.5, "Predator Death Rate"},
+          0.1, 1, 
+         0.01}, {{$CellContext`\[Delta]$$, 0.02, 
+          "Predator Reproduction Rate"}, 0.005, 0.05, 
+         0.001}, {{$CellContext`x0$$, 40, "Initial Prey Population"}, 10, 100,
+          1}, {{$CellContext`y0$$, 9, "Initial Predator Population"}, 1, 50, 
+         1}, {{$CellContext`tmax$$, 50, "Time Duration"}, 10, 100, 5}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{403.1, {310.21728222924867`, 315.94921582299867`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.946048116617173*^9, 3.9460483506589117`*^9, {3.946078955454689*^9, 
+   3.946078982177394*^9}},
+ CellLabel->"Out[76]=",ExpressionUUID->"afd0c4f0-362e-4978-9c58-0a5658fbc8d9"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"14.1 for Mac OS X ARM (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"af84f630-0ef8-4bdf-b3e0-9565dcbd9ca0"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[422, 15, 195, 3, 96, "Title",ExpressionUUID->"7119caf0-49a6-4e6f-b3cd-dc3abd203610"],
+Cell[620, 20, 831, 15, 77, "Text",ExpressionUUID->"c9f7c07f-b15f-4008-aadb-c13b32dab481"],
+Cell[CellGroupData[{
+Cell[1476, 39, 263, 4, 66, "Section",ExpressionUUID->"602e9aa4-f191-4c87-b6cc-2fbb9fbf0855"],
+Cell[CellGroupData[{
+Cell[1764, 47, 4871, 122, 192, "Input",ExpressionUUID->"58d1764e-6306-4cb7-934f-e9e272252988"],
+Cell[6638, 171, 5097, 92, 493, "Output",ExpressionUUID->"f3dc227b-45f2-4aa2-a023-672135bcf9b1"]
+}, Open  ]],
+Cell[11750, 266, 483, 9, 33, "Text",ExpressionUUID->"30a8b1b8-2281-4dd5-b059-42d356488ca4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12270, 280, 204, 4, 66, "Section",ExpressionUUID->"aee156db-ab4c-47be-8f04-fe1a339f91b1"],
+Cell[CellGroupData[{
+Cell[12499, 288, 5167, 130, 213, "Input",ExpressionUUID->"28b3998f-791d-4585-b9c4-cf3e8dfc6456"],
+Cell[17669, 420, 5099, 92, 643, "Output",ExpressionUUID->"afd0c4f0-362e-4978-9c58-0a5658fbc8d9"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
